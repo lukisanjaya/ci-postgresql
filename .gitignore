@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.idea
+.images
+cache
+uploads
+docker-compose.yml
+Dockerfile
+mysql_directory
+carabiner/*
+application/third_party/vendor
