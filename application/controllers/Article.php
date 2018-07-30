@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-use Cocur\Slugify\Slugify;
 include_once APPPATH . "libraries/REST_Controller.php";
 
 class Article extends REST_Controller {
@@ -46,7 +45,6 @@ class Article extends REST_Controller {
             "from"         => $offset + 1,
             "to"           => $page * count($articles['results']),
         ];
-        // var_dump($data);die;
 
         $this->benchmark->mark('code_end');
         $data['diagnostic']['elapsetime'] = $this->benchmark->elapsed_time('code_start', 'code_end');
@@ -99,7 +97,6 @@ class Article extends REST_Controller {
             $data['results'][$key]->tags = $this->article_m->getByTag($value->id);
             $data['results'][$key]->categories = $this->article_m->getByCategory($value->id);
         }
-        // var_dump($data);die;
 
         $data['meta']          = [
             "total"        => $articles['total_results'],
@@ -137,7 +134,6 @@ class Article extends REST_Controller {
             $data['results'][$key]->tags = $this->article_m->getByTag($value->id);
             $data['results'][$key]->categories = $this->article_m->getByCategory($value->id);
         }
-        // var_dump($data);die;
 
         $data['meta']          = [
             "total"        => $articles['total_results'],
@@ -175,7 +171,6 @@ class Article extends REST_Controller {
             $data['results'][$key]->tags = $this->article_m->getByTag($value->id);
             $data['results'][$key]->categories = $this->article_m->getByCategory($value->id);
         }
-        // var_dump($data);die;
 
         $data['meta']          = [
             "total"        => $articles['total_results'],
@@ -195,22 +190,4 @@ class Article extends REST_Controller {
             $this->response(array('error' => 'data could not be found'), 404);
         }
      }
-
-    /**
-     * seed local database
-     */
-    function seed_get()
-    {
-        // purge existing data
-        $this->_truncate_db();
-    }
- 
-    private function _truncate_db()
-    {
-        $this->article_m->truncate();
-        $this->tag_m->truncate();
-        $this->category_m->truncate();
-        $this->article_category_m->truncate();
-        $this->article_tag_m->truncate();
-    }
 }
